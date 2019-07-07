@@ -1,0 +1,38 @@
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Codegen
+.generated
+.apt_generated
+generated_src/
+**/src/generated/
+docs/generated
+
+# OS X
+.DS_Store
+
+# Java
+*.class
+
+# Build Systems
+.gradle/
+bin/
+build/
+out/
+
+# Log Files
+*/var/log/
+*/dev/log
+
+# SublimeText + TextMate + Vim
+*.sublime-workspace
+*.sublime-project
+*.tmproj
+*.tmproject
+*.sw[op]
+
+# VSCode
+.vscode/
