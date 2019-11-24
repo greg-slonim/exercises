@@ -1,18 +1,38 @@
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
 
-.gradle/4.10.3/fileChanges/last-build.bin
-.gradle/4.10.3/fileContent/fileContent.lock
-.gradle/4.10.3/fileHashes/fileHashes.bin
-.gradle/4.10.3/fileHashes/fileHashes.lock
-.gradle/4.10.3/fileHashes/resourceHashesCache.bin
-.gradle/4.10.3/gc.properties
-.gradle/4.10.3/javaCompile/classAnalysis.bin
-.gradle/4.10.3/javaCompile/jarAnalysis.bin
-.gradle/4.10.3/javaCompile/javaCompile.lock
-.gradle/4.10.3/javaCompile/taskHistory.bin
-.gradle/4.10.3/taskHistory/taskHistory.bin
-.gradle/4.10.3/taskHistory/taskHistory.lock
-.gradle/buildOutputCleanup/buildOutputCleanup.lock
-.gradle/buildOutputCleanup/cache.properties
-.gradle/buildOutputCleanup/outputFiles.bin
-.gradle/vcs-1/gc.properties
-.idea/checkstyle-idea.xml
+# Codegen
+.generated
+.apt_generated
+generated_src/
+**/src/generated/
+docs/generated
+
+# OS X
+.DS_Store
+
+# Java
+*.class
+
+# Build Systems
+.gradle/
+bin/
+build/
+out/
+
+# Log Files
+*/var/log/
+*/dev/log
+
+# SublimeText + TextMate + Vim
+*.sublime-workspace
+*.sublime-project
+*.tmproj
+*.tmproject
+*.sw[op]
+
+# VSCode
+.vscode/
