@@ -2,7 +2,7 @@ package com.gslonim.coding.algo;
 
 public class CloudJumper {
 
-    static int jumpingOnClouds(int[] clouds) {
+    public static int jumpingOnClouds(int[] clouds) {
         int position = 0, steps = 0;
 
         if (clouds.length == 0) {

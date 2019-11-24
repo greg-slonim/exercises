@@ -1,6 +1,6 @@
 package com.gslonim.coding.algo;
 
-import com.gslonim.coding.utils.ListNode;
+import com.gslonim.utils.ListNode;
 
 public class RemoveDuplicateLinks {
     public static ListNode removeDuplicates(ListNode inputRootNode) {

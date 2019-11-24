@@ -1,10 +1,12 @@
 package com.gslonim.algo;
 
+import com.gslonim.coding.algo.RemoveDuplicateLinks;
+import com.gslonim.utils.ListNode;
 import org.junit.Test;
-import practice.utils.ListNode;
 
+import static com.gslonim.utils.LinkedListUtils.parseAndCreateListOfInteger;
 import static org.assertj.core.api.Assertions.assertThat;
-import static practice.utils.LinkedListUtils.parseAndCreateListOfInteger;
+
 
 public class RemoveDuplicateLinksTest {
     @Test

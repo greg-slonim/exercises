@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SockMatcher {
-    static int sockMerchant(int n, int[] arrayOfColor) {
+    public static int sockMerchant(int n, int[] arrayOfColor) {
 
         Map<Integer, Integer> matchingPairs = new HashMap<>();
         for (int i = 0; i < n; i++) {

@@ -50,7 +50,7 @@ public class LongestPalindromeSubstring {
         return longestPalindrome;
     }
 
-    static boolean isPalindrome(String input) {
+    public static boolean isPalindrome(String input) {
         int leftIndex = 0, rightIndex = input.length() - 1;
 
         while (leftIndex < rightIndex) {
@@ -84,7 +84,7 @@ public class LongestPalindromeSubstring {
         return input.substring(start, end + 1);
     }
 
-    static int expandAroundCenter(String input, int left, int right) {
+    public static int expandAroundCenter(String input, int left, int right) {
         int leftIndex = left, rightIndex = right;
 
         while (leftIndex >= 0 && rightIndex < input.length()

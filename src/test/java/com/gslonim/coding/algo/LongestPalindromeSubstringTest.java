@@ -2,8 +2,8 @@ package com.gslonim.coding.algo;
 
 import org.junit.Test;
 
+import static com.gslonim.coding.algo.LongestPalindromeSubstring.expandAroundCenter;
 import static org.assertj.core.api.Assertions.assertThat;
-import static practice.LongestPalindromeSubstring.expandAroundCenter;
 
 public class LongestPalindromeSubstringTest {
     @Test
