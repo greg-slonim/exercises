@@ -1,4 +1,4 @@
-package com.gslonim.coding.algo;
+package com.gslonim.coding.strings;
 
 public class ReverseString {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.gslonim.coding.datastructure;
+package com.gslonim.utils;
 
 import java.util.List;
 import java.util.Objects;

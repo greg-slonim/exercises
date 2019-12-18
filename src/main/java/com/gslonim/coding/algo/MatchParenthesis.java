@@ -2,6 +2,7 @@ package com.gslonim.coding.algo;
 
 import com.google.common.collect.ImmutableMap;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
@@ -29,5 +30,37 @@ public class MatchParenthesis {
         }
 
         return matching.isEmpty();
+    }
+
+    public static boolean should_match_parens(String s) {
+        Map<Character, Character> bracketMatch = setupBrackets();
+        Stack<Character> brackets = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            Character bracket = s.charAt(i);
+            System.out.print(bracket);
+
+             if (setupBrackets().containsValue(bracket)) {
+                 brackets.push(bracket);
+             } else {
+                 if (brackets.isEmpty()) {
+                     return false;
+                 }
+                 if (!brackets.peek().equals(bracketMatch.get(bracket))) {
+                     return false;
+                 }
+                 brackets.pop();
+             }
+        }
+        System.out.println();
+        return true;
+    }
+
+    private static Map<Character, Character> setupBrackets() {
+        Map<Character, Character> bracketMatch = new HashMap<>();
+        bracketMatch.put(')', '(');
+        bracketMatch.put('}', '{');
+        bracketMatch.put(']', '[');
+        return bracketMatch;
     }
 }

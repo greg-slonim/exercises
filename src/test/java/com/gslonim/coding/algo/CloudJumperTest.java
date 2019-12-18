@@ -1,5 +1,6 @@
 package com.gslonim.coding.algo;
 
+import com.gslonim.coding.arrays.CloudJumper;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

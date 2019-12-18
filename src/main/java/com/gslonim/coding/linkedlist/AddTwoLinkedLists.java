@@ -1,4 +1,4 @@
-package com.gslonim.coding.ididnotdoit;
+package com.gslonim.coding.linkedlist;
 
 
 import com.gslonim.utils.ListNode;

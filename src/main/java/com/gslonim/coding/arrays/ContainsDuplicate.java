@@ -1,4 +1,4 @@
-package com.gslonim.coding.algo;
+package com.gslonim.coding.arrays;
 
 import java.util.HashSet;
 import java.util.Set;

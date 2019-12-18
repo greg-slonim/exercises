@@ -1,4 +1,4 @@
-package com.gslonim.coding.algo;
+package com.gslonim.coding.stdin;
 
 import java.util.ArrayList;
 import java.util.List;

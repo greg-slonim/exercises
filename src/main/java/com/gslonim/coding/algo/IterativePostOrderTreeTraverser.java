@@ -1,7 +1,7 @@
 package com.gslonim.coding.algo;
 
 import com.gslonim.coding.Harness;
-import com.gslonim.coding.datastructure.Node;
+import com.gslonim.utils.Node;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.gslonim.coding.algo;
+package com.gslonim.coding.arrays;
 
 public class CloudJumper {
 

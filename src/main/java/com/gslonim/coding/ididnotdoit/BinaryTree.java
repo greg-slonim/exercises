@@ -26,7 +26,6 @@ public class BinaryTree {
         if (node == null) {
             return 0;
         }
-        System.out.println("Calling sum("+node.left+") + sum("+node.right+")");
         return sum(node.left) + node.value + sum(node.right);
     }
 

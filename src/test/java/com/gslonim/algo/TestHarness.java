@@ -3,15 +3,29 @@ package com.gslonim.algo;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Streams;
+import com.gslonim.coding.arrays.AddOneToNumberRepresentedByArray;
+import com.gslonim.coding.arrays.ContainsDuplicate;
+import com.gslonim.coding.dynamic.Fibonacci_Dynamic;
+import com.gslonim.coding.graphs.Binary_Tree_DFS;
+import com.gslonim.coding.hashtables.Count_Geometrical_Progression_Triplets;
+import com.gslonim.coding.hashtables.Frequency_Queries;
+import com.gslonim.coding.kth_number.Find_K_Smallest_Number;
+import com.gslonim.coding.recursion.Climbing_Stairs_One_Two_or_Three;
+import com.gslonim.coding.recursion.Climbing_Stairs_One_or_Two;
+import com.gslonim.coding.sorting.Measure_Median_Expenditures;
+import com.gslonim.coding.strings.*;
+import com.gslonim.coding.subsets.Subsets_Operations;
+import com.gslonim.coding.systems.Sample_Load_and_Auto_Scale_Instances;
 import com.gslonim.coding.algo.*;
-import com.gslonim.coding.datastructure.Node;
+import com.gslonim.coding.twosigma.TwoSigma_Challenge;
+import com.gslonim.utils.Node;
+import com.gslonim.coding.hashtables.Note_Created_From_Magazine;
+import com.gslonim.coding.linkedlist.Add_Node_to_Sorted_Linked_List;
 import one.util.streamex.EntryStream;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -266,12 +280,17 @@ public class TestHarness {
     @Test
     public void should_fild_all_subsets_of_given_numbers() {
         int[] testCase = new int[]{1, 5, 3};
-        List<List<Integer>> subsets = FindAllSubsetsOfGivenNumbers.findSubsets(testCase);
+        List<List<Integer>> subsets = Subsets_Operations.find_all_combinations(testCase);
         List<List<Integer>> expected = ImmutableList.of(
                 ImmutableList.of(), ImmutableList.of(1),
                 ImmutableList.of(5), ImmutableList.of(1, 5),
                 ImmutableList.of(3), ImmutableList.of(1, 3), ImmutableList.of(5, 3), ImmutableList.of(1, 5, 3));
         assertThat(subsets).hasSameElementsAs(expected);
+    }
+
+    @Test
+    public void should_find_all_permutations_of_numbers() {
+
     }
 
     @Test
@@ -500,6 +519,19 @@ public class TestHarness {
     }
 
     @Test
+    public void should_calculate_notifications_sent_based_on_median_expenditures() {
+        int[] expenditures = new int[] {10, 20, 30, 40, 50};
+        assertThat(Measure_Median_Expenditures.activityNotifications(expenditures, 3))
+                .isEqualTo(1);
+        expenditures = new int[] {2, 3, 4, 2, 3, 6, 8, 4, 5};
+        assertThat(Measure_Median_Expenditures.activityNotifications(expenditures, 5))
+                .isEqualTo(2);
+        expenditures = new int[] {1, 2, 3, 4, 4};
+        assertThat(Measure_Median_Expenditures.activityNotifications(expenditures, 4))
+                .isEqualTo(0);
+    }
+
+    @Test
     public void testMatchingParenthesis() {
         assertThat(MatchParenthesis.areParenthesisMatched("(a + b) + ((1 + 3) - (9 - 8))"))
                 .isTrue();
@@ -518,6 +550,20 @@ public class TestHarness {
 
         assertThat(MatchParenthesis.areParenthesisMatched("()[)(]"))
                 .isFalse();
+    }
+
+    @Test
+    public void test_brackets_match() {
+        assertThat(MatchParenthesis.should_match_parens("[{")).isFalse();
+        assertThat(MatchParenthesis.should_match_parens("{}([{()[]{{}}}])({})")).isTrue();
+        assertThat(MatchParenthesis.should_match_parens("{({}{[({({})([[]])}({}))({})]})}")).isFalse();
+        assertThat(MatchParenthesis.should_match_parens("()[]")).isTrue();
+        assertThat(MatchParenthesis.should_match_parens("{)[])}]){){]}[(({[)[{{[((]{()[]}][([(]}{](])()(}{(]}{})[)))[](){({)][}()(("))
+                .isFalse();
+        assertThat(MatchParenthesis.should_match_parens("[][(([{}])){}]{}[()]{([[{[()]({}[])()()}[{}][]]])}"))
+                .isTrue();
+        assertThat(MatchParenthesis.should_match_parens("(}]}")).isFalse();
+
     }
 
     @Test
@@ -585,7 +631,134 @@ public class TestHarness {
 
     @Test
     public void should_find_all_missing_numbers_in_array_1_to_n_with_fast_and_slow_pointers() {
+        int [] arr = new int[] {1, 4, 4, 3, 2};
+        int slow = 0, fast = 0;
+        do {
+            slow = arr[slow];
+            fast = arr[arr[fast]];
+            System.out.println("slow:" + slow + " fast:" + fast);
+        } while (slow != fast);
 
+        // find cycle length
+        int current = arr[slow];
+        int cycleLength = 0;
+        do {
+            System.out.println("start current at: " + current);
+            current = arr[current];
+            System.out.println("current = " + current);
+            cycleLength++;
+        } while (current != arr[slow]);
+
+    }
+
+    @Test
+    public void should_write_note_with_words_from_magazine() {
+        String[] magazine = new String[] {"two", "times", "three", "is", "not", "four"};
+        String[] note = new String[] {"two", "times", "two", "is", "four"};
+        assertThat(Note_Created_From_Magazine.checkMagazine(magazine, note))
+                .isEqualTo("No");
+    }
+
+    @Test
+    public void should_insert_node_into_sorted_linked_list() {
+        int[] values = new int[] {2, 3};
+        Add_Node_to_Sorted_Linked_List.DoublyLinkedListNode one =
+                new Add_Node_to_Sorted_Linked_List.DoublyLinkedListNode(1);
+        Add_Node_to_Sorted_Linked_List.DoublyLinkedListNode head = one;
+        for (int value : values) {
+            Add_Node_to_Sorted_Linked_List.insertNext(one, value);
+            one = one.next;
+        }
+        Add_Node_to_Sorted_Linked_List.sortedInsert(head, 4);
+    }
+
+    @Test
+    public void stringTests() {
+        String s = "abcd";
+        System.out.println("s.substring(0, 2) = " + s.substring(0, 2));
+
+        System.out.println((int)Math.ceil(25/2));
+    }
+
+    @Test
+    public void should_autoscale_per_rules() {
+        Integer[] utilisation = new Integer[] {
+                1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                65, 1, 2};
+        assertThat(Sample_Load_and_Auto_Scale_Instances.finalInstances(3, Arrays.asList(utilisation)))
+                .isEqualTo(2);
+        utilisation = new Integer[] {
+                100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                65, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                50,
+                24, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                70, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        assertThat(Sample_Load_and_Auto_Scale_Instances.finalInstances(2_000_000, Arrays.asList(utilisation)))
+                .isEqualTo(8_000_000);
+    }
+    @Test
+    public void should_return_look_and_say_sequence () {
+        assertThat(Look_and_Say.lookAndSay(3)).isEqualTo(21);
+        assertThat(Look_and_Say.lookAndSay(4)).isEqualTo(1211);
+        assertThat(Look_and_Say.lookAndSay(5)).isEqualTo(111221);
+        assertThat(Look_and_Say.lookAndSay(6)).isEqualTo(312211);
+        assertThat(Look_and_Say.lookAndSay(7)).isEqualTo(13112221);
+    }
+
+    @Test
+    public void should_determine_if_two_strings_are_one_edit_away() {
+        assertThat(Two_Strings_One_Edit_Away.isOneEditAway("cat", "dog")).isFalse();
+        assertThat(Two_Strings_One_Edit_Away.isOneEditAway("cat", "cats")).isTrue();
+        assertThat(Two_Strings_One_Edit_Away.isOneEditAway("cat", "cut")).isTrue();
+        assertThat(Two_Strings_One_Edit_Away.isOneEditAway("cat", "cast")).isTrue();
+        assertThat(Two_Strings_One_Edit_Away.isOneEditAway("cat", "at")).isTrue();
+        assertThat(Two_Strings_One_Edit_Away.isOneEditAway("cat", "act")).isFalse();
+    }
+
+    @Test
+    public void should_return_n_fibonacci_number_without_recursion() {
+        assertThat(Fibonacci_Dynamic.fibonacci(5)).isEqualTo(5);
+        assertThat(Fibonacci_Dynamic.fibonacci(6)).isEqualTo(8);
+        assertThat(Fibonacci_Dynamic.fibonacci(8)).isEqualTo(21);
+        assertThat(Fibonacci_Dynamic.fibonacci(15)).isEqualTo(610);
+    }
+
+    @Test
+    public void should_populate_largest_common_substring_matrix() {
+        assertThat(Common_Child_of_Two_Strings.commonChild("A", "A")).isEqualTo(1);
+        assertThat(Common_Child_of_Two_Strings.commonChild("SHINCHAN", "NOHARAAA")).isEqualTo(3);
+        assertThat(Common_Child_of_Two_Strings.commonChild("HARRY", "SALLY")).isEqualTo(2);
+        assertThat(Common_Child_of_Two_Strings.commonChild("AA", "BB")).isEqualTo(0);
+        assertThat(Common_Child_of_Two_Strings.commonChild("ABCDEF", "FBDAMN")).isEqualTo(2);
+    }
+
+    @Test
+    public void should_perform_frequency_queries() {
+        List<List<Integer>> commands = ImmutableList.of(
+                ImmutableList.of(1, 1),
+                ImmutableList.of(2, 2),
+                ImmutableList.of(3, 2),
+                ImmutableList.of(1, 1),
+                ImmutableList.of(1, 1),
+                ImmutableList.of(2, 1),
+                ImmutableList.of(3, 2));
+        assertThat(Frequency_Queries.freqQuery(commands)).containsExactly(0, 1);
+        commands = ImmutableList.of(
+                ImmutableList.of(1, 5),
+                ImmutableList.of(1, 6),
+                ImmutableList.of(3, 2),
+                ImmutableList.of(1, 10),
+                ImmutableList.of(1, 10),
+                ImmutableList.of(1, 6),
+                ImmutableList.of(2, 5),
+                ImmutableList.of(3, 2));
+        assertThat(Frequency_Queries.freqQuery(commands)).containsExactly(0, 1);
+        commands = ImmutableList.of(
+                ImmutableList.of(3, 4),
+                ImmutableList.of(2, 1003),
+                ImmutableList.of(1, 16),
+                ImmutableList.of(3, 1));
+        assertThat(Frequency_Queries.freqQuery(commands)).containsExactly(0, 1);
     }
 
     @Test
@@ -595,10 +768,89 @@ public class TestHarness {
         queue.offer(4);
         queue.offer(1);
         queue.offer(3);
+
         for (int number : queue.toArray(new Integer[0])) {
             System.out.println("number = " + number);
         }
 
+    }
+
+    @Test
+    public void should_calculate_number_of_triplet_geometrical_progressions() {
+        assertThat(Count_Geometrical_Progression_Triplets.countTriplets(ImmutableList.of(1L, 2L, 2L, 4L), 2L))
+            .isEqualTo(2);
+    }
+
+    @Test
+    public void should_find_kth_smallest_number_in_unsorted_array() {
+        int[] array = new int[] {1, 5, 12, 2, 11, 5};
+        assertThat(Find_K_Smallest_Number.findKthSmallestNumber(array, 3)).isEqualTo(5);
+        assertThat(Find_K_Smallest_Number.findKthSmallestNumber(array, 4)).isEqualTo(5);
+        array = new int[] {5, 12, 11, -1, 12};
+        assertThat(Find_K_Smallest_Number.findKthSmallestNumber(array, 3)).isEqualTo(11);
+    }
+
+    @Test
+    public void should_find_number_of_ways_to_climb_stairs_by_one_or_two() {
+        assertThat(Climbing_Stairs_One_or_Two.climb_recursively(3)).isEqualTo(3);
+        assertThat(Climbing_Stairs_One_or_Two.climb_recursively(6)).isEqualTo(13);
+        assertThat(Climbing_Stairs_One_or_Two.climb_iteratively(6)).isEqualTo(13);
+    }
+
+    @Test
+    public void should_find_number_of_ways_to_climb_stairs_by_one_two_or_three() {
+        assertThat(Climbing_Stairs_One_Two_or_Three.climb_recursively(1)).isEqualTo(1);
+        assertThat(Climbing_Stairs_One_Two_or_Three.climb_recursively(3)).isEqualTo(4);
+        assertThat(Climbing_Stairs_One_Two_or_Three.climb_recursively(7)).isEqualTo(44);
+        assertThat(Climbing_Stairs_One_Two_or_Three.climb_recursively(8)).isEqualTo(81);
+    }
+
+    @Test
+    public void should_find_number_of_ways_to_climb_stairs_by_one_two_or_three_without_array() {
+        assertThat(Climbing_Stairs_One_Two_or_Three.climb_iteratively_without_array(3)).isEqualTo(4);
+        assertThat(Climbing_Stairs_One_Two_or_Three.climb_iteratively_without_array(5)).isEqualTo(13);
+        assertThat(Climbing_Stairs_One_Two_or_Three.climb_iteratively_without_array(8)).isEqualTo(81);
+    }
+
+    @Test
+    public void should_solve_two_sigma_problem_1() {
+//        assertThat(TwoSigma_Challenge.compressedString("alaasass")).isEqualTo("ala2sas2");
+//        assertThat(TwoSigma_Challenge.compressedString("ala")).isEqualTo("ala");
+//        assertThat(TwoSigma_Challenge.compressedString("a")).isEqualTo("a");
+//        assertThat(TwoSigma_Challenge.compressedString("abcdefgh")).isEqualTo("abcdefgh");
+//        assertThat(TwoSigma_Challenge.compressedString("aaaaaaaaaazaarqeeee")).isEqualTo("a10za2rqe4");
+
+//        assertThat(TwoSigma_Challenge.find_distinct_palindromes("aabaa")).isEqualTo(5);
+//        assertThat(TwoSigma_Challenge.find_distinct_palindromes("a")).isEqualTo(1);
+//        assertThat(TwoSigma_Challenge.find_distinct_palindromes("ab")).isEqualTo(2);
+//        assertThat(TwoSigma_Challenge.find_distinct_palindromes("aba")).isEqualTo(3);
+//        assertThat(TwoSigma_Challenge.find_distinct_palindromes("mama")).isEqualTo(4);
+//        assertThat(TwoSigma_Challenge.find_distinct_palindromes("abcddcbabcdcdaadcdcbabcdddcb")).isEqualTo(4);
+
+        assertThat(TwoSigma_Challenge.problem_three("aabaa")).isEqualTo(5);
+        assertThat(TwoSigma_Challenge.problem_three("a")).isEqualTo(1);
+        assertThat(TwoSigma_Challenge.problem_three("ab")).isEqualTo(2);
+        assertThat(TwoSigma_Challenge.problem_three("aba")).isEqualTo(3);
+        assertThat(TwoSigma_Challenge.problem_three("mama")).isEqualTo(4);
+        assertThat(TwoSigma_Challenge.problem_three("abcddcbabcdcdaadcdcbabcdddcb")).isEqualTo(27);
+    }
+
+    @Test
+    public void should_find_all_palindromic_substrings_in_a_string() {
+        assertThat(TwoSigma_Challenge.problem_three("aabaa")).isEqualTo(5);
+        assertThat(TwoSigma_Challenge.problem_three("a")).isEqualTo(1);
+        assertThat(TwoSigma_Challenge.problem_three("ab")).isEqualTo(2);
+        assertThat(TwoSigma_Challenge.problem_three("aba")).isEqualTo(3);
+        assertThat(TwoSigma_Challenge.problem_three("mama")).isEqualTo(4);
+        assertThat(TwoSigma_Challenge.problem_three("abcddcbabcdcdaadcdcbabcdddcb")).isEqualTo(27);
+
+        assertThat(Find_All_Unique_Palindromic_Substrings.count_substring_palindromes("aabaa")).isEqualTo(5);
+        assertThat(Find_All_Unique_Palindromic_Substrings.count_substring_palindromes("a")).isEqualTo(1);
+        assertThat(Find_All_Unique_Palindromic_Substrings.count_substring_palindromes("ab")).isEqualTo(2);
+        assertThat(Find_All_Unique_Palindromic_Substrings.count_substring_palindromes("aba")).isEqualTo(3);
+        assertThat(Find_All_Unique_Palindromic_Substrings.count_substring_palindromes("mama")).isEqualTo(4);
+        assertThat(Find_All_Unique_Palindromic_Substrings.count_substring_palindromes("abcddcbabcdcdaadcdcbabcdddcb"))
+                .isEqualTo(27);
     }
 
     private static String fizzBuzz(int input) {
@@ -627,5 +879,28 @@ public class TestHarness {
         Node two = new Node(2, ImmutableList.of());
         Node four = new Node(4, ImmutableList.of());
         return new Node(1, ImmutableList.of(three, two, four));
+    }
+
+    @Test
+    public void should_traverse_BST_using_DFS() {
+        Binary_Tree_DFS.TreeNode root = buildSimpleBinaryTree();
+        Binary_Tree_DFS.traverse_DFS(root);
+    }
+
+    @Test
+    public void should_find_root_to_leav_path_summing_to_target_sum() {
+        Binary_Tree_DFS.TreeNode root = buildSimpleBinaryTree();
+        assertThat(Binary_Tree_DFS.has_path(root, 23)).isTrue();
+    }
+
+    @NotNull
+    private Binary_Tree_DFS.TreeNode buildSimpleBinaryTree() {
+        Binary_Tree_DFS.TreeNode root = new Binary_Tree_DFS.TreeNode(12);
+        root.left = new Binary_Tree_DFS.TreeNode(7);
+        root.right = new Binary_Tree_DFS.TreeNode(1);
+        root.left.left = new Binary_Tree_DFS.TreeNode(9);
+        root.right.left = new Binary_Tree_DFS.TreeNode(10);
+        root.right.right = new Binary_Tree_DFS.TreeNode(5);
+        return root;
     }
 }

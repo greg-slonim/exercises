@@ -1,4 +1,4 @@
-package com.gslonim.coding.algo;
+package com.gslonim.coding.strings;
 
 public class CompressedStringComparison {
     public static boolean isEqualToCompressedString(String compressed, String literal) {

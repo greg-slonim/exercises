@@ -1,4 +1,4 @@
-package com.gslonim.coding.datastructure;
+package com.gslonim.coding.hashtables;
 
 import org.junit.Test;
 
