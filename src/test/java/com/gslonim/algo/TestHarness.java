@@ -10,8 +10,10 @@ import com.gslonim.coding.graphs.Binary_Tree_DFS;
 import com.gslonim.coding.hashtables.Count_Geometrical_Progression_Triplets;
 import com.gslonim.coding.hashtables.Frequency_Queries;
 import com.gslonim.coding.kth_number.Find_K_Smallest_Number;
+import com.gslonim.coding.maths.Power_of_number;
 import com.gslonim.coding.recursion.Climbing_Stairs_One_Two_or_Three;
 import com.gslonim.coding.recursion.Climbing_Stairs_One_or_Two;
+import com.gslonim.coding.searching.Binary_Search;
 import com.gslonim.coding.sorting.Measure_Median_Expenditures;
 import com.gslonim.coding.strings.*;
 import com.gslonim.coding.subsets.Subsets_Operations;
@@ -290,7 +292,35 @@ public class TestHarness {
 
     @Test
     public void should_find_all_permutations_of_numbers() {
+        List<List<Integer>> expected = ImmutableList.of(
+                ImmutableList.of(1, 2, 3),
+                ImmutableList.of(1, 3, 2),
+                ImmutableList.of(2, 1, 3),
+                ImmutableList.of(2, 3, 1),
+                ImmutableList.of(3, 2, 1),
+                ImmutableList.of(3, 1, 2));
+        assertThat(Subsets_Operations.findPermutations(new int[] {1, 2, 3})).hasSameElementsAs(expected);
+    }
 
+    @Test
+    public void should_find_number_in_sorted_array_using_binary_search() {
+        int[] arr = new int[] {1, 3, 5, 7, 13, 15, 21, 34, 44, 55, 67, 88, 132, 456};
+        assertThat(Binary_Search.find_if_present_in_array_return_index(arr, 67)).isEqualTo(10);
+    }
+
+    @Test
+    public void should_find_number_in_sorted_array_unknown_order_using_binary_search() {
+        int[] arr = new int[] {45, 44, 43, 32, 23, 12, 5, 2, 1};
+        assertThat(Binary_Search.find_if_present_in_array_unknown_sort_order(arr, 44)).isEqualTo(1);
+        assertThat(Binary_Search.find_if_present_in_array_unknown_sort_order(arr, 23)).isEqualTo(4);
+        arr = new int[] {1, 3, 5, 7, 13, 15, 21, 34, 44, 55, 67, 88, 132, 456};
+        assertThat(Binary_Search.find_if_present_in_array_unknown_sort_order(arr, 67)).isEqualTo(10);
+    }
+
+    @Test
+    public void should_find_key_ceiling_in_sorted_array() {
+        int[] arr = new int[] {1, 3, 5, 7, 13, 15, 21, 34, 44, 55, 67, 88, 132, 456};
+        assertThat(Binary_Search.find_ceiling_of_a_number(arr, 46)).isEqualTo(9);
     }
 
     @Test
@@ -891,6 +921,18 @@ public class TestHarness {
     public void should_find_root_to_leav_path_summing_to_target_sum() {
         Binary_Tree_DFS.TreeNode root = buildSimpleBinaryTree();
         assertThat(Binary_Tree_DFS.has_path(root, 23)).isTrue();
+    }
+
+    @Test
+    public void should_raise_number_to_power() {
+        assertThat(Power_of_number.power(2, 3)).isEqualTo(8);
+        assertThat(Power_of_number.power(2, 6)).isEqualTo(64);
+        assertThat(Power_of_number.power(2, 12)).isEqualTo(4096);
+        assertThat(Power_of_number.power(3, 4)).isEqualTo(81);
+        assertThat(Power_of_number.power(7, 3)).isEqualTo(343);
+        assertThat(Power_of_number.power(10, 3)).isEqualTo(1000);
+        assertThat(Power_of_number.power(9, 1)).isEqualTo(9);
+        assertThat(Power_of_number.power(2, 5)).isEqualTo(32);
     }
 
     @NotNull

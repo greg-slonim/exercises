@@ -36,13 +36,13 @@ public class Subsets_Operations {
 //        }
 //    }
 
-    public List<List<Integer>> findPermutations(int[] nums) {
+    public static List<List<Integer>> findPermutations(int[] nums) {
         List<List<Integer>> permutations = new ArrayList<>();
         Queue<List<Integer>> queue = new LinkedList<>();
         queue.add(new ArrayList<>());
 
         for (int number : nums) {
-            int size = permutations.size();
+            int size = queue.size();
             for (int i = 0; i < size; i++) {
                 List<Integer> permutation = queue.poll();
                 for (int j = 0; j <= permutation.size(); j++) {
