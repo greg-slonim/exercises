@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestFastAndSlowPointers extends BaseAlgoTest {
+public class TestFastAndSlowPointerAlgorithm extends BaseAlgoTest {
     @Test
     public void should_detect_cycles_in_linked_list() {
         whenListOneIs(123456);
