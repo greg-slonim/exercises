@@ -823,7 +823,7 @@ public class TestHarness {
     @Test
     public void should_find_number_of_ways_to_climb_stairs_by_one_or_two() {
         assertThat(Climbing_Stairs_One_or_Two.climb_recursively(3)).isEqualTo(3);
-        assertThat(Climbing_Stairs_One_or_Two.climb_recursively(6)).isEqualTo(13);
+        assertThat(Climbing_Stairs_One_or_Two.climb_recursively(4)).isEqualTo(5);
         assertThat(Climbing_Stairs_One_or_Two.climb_iteratively(6)).isEqualTo(13);
     }
 
