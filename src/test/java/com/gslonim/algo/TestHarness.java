@@ -14,7 +14,7 @@ import com.gslonim.coding.maths.Power_of_number;
 import com.gslonim.coding.recursion.Climbing_Stairs_One_Two_or_Three;
 import com.gslonim.coding.recursion.Climbing_Stairs_One_or_Two;
 import com.gslonim.coding.searching.Binary_Search;
-import com.gslonim.coding.sorting.Measure_Median_Expenditures;
+import com.gslonim.coding.pattern_find_missing_number.Measure_Median_Expenditures;
 import com.gslonim.coding.strings.*;
 import com.gslonim.coding.subsets.Subsets_Operations;
 import com.gslonim.coding.systems.Sample_Load_and_Auto_Scale_Instances;
@@ -657,6 +657,29 @@ public class TestHarness {
             }
         }
         assertThat(missingNumbers).containsExactly(4, 6, 7);
+    }
+
+    @Test
+    public void should_find_a_smallest_number_not_present_in_array() {
+        int[] nums = new int[] {1, 3, 6, 4, 1, 2};
+        int i = 1;
+        int missingNumber = 0;
+        while (i < nums.length) {
+            if (nums[i] < nums.length && nums[i] != i){
+                int tmp = nums[i];
+                nums[i] = nums[tmp];
+                nums[tmp] = tmp;
+            } else {
+                i++;
+            }
+        }
+
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != j) {
+                missingNumber = j;
+            }
+        }
+        assertThat(missingNumber).isEqualTo(5);
     }
 
     @Test

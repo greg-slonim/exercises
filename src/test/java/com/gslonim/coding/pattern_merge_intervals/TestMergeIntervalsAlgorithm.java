@@ -16,6 +16,47 @@ public class TestMergeIntervalsAlgorithm extends BaseAlgoTest {
     private Interval newInterval;
 
     @Test
+    public void should_find_array_equilibrium() {
+    /*
+        An array A consisting of N integers is given.
+        An equilibrium index of this array is any integer P such that 0 ≤ P < N and
+        the sum of elements of lower indices is equal to the sum of elements of higher indices, i.e.
+                A[0] + A[1] + ... + A[P−1] = A[P+1] + ... + A[N−2] + A[N−1].
+        Sum of zero elements is assumed to be equal to 0. This can happen if P = 0 or if P = N−1
+        Example: [1, -1, 0, 5, -2, -3]
+        Index 2 is the equilibrium because 1 +(-1) = 0 and 5 + (-2) + (-3) = 0
+        There might be multiple equilibrium points, return any of them.
+     */
+        whenArrayIs(new int[]{});
+        thenTheEquilibriumPointIs(-1);
+
+        whenArrayIs(new int [] {3});
+        thenTheEquilibriumPointIs(0);
+
+        whenArrayIs(new int[] {0, 5});
+        thenTheEquilibriumPointIs(1);
+
+        whenArrayIs(new int[] {3, 0});
+        thenTheEquilibriumPointIs(0);
+
+        whenArrayIs(new int[] {0, -1, 1, 56, 5, -2, -3});
+        thenTheEquilibriumPointIs(3);
+
+        whenArrayIs(new int[] {0, -1, 2, -1, 5, -2, -3, 5});
+        thenTheEquilibriumPointIs(4);
+
+        whenArrayIs(new int[] {0, -1, -1, -1, -4, 2, 5, 5});
+        thenTheEquilibriumPointIs(7);
+
+        whenArrayIs(new int[] {20, -1, -1, -1, -4, 2, 5});
+        thenTheEquilibriumPointIs(0);
+    }
+
+    private void thenTheEquilibriumPointIs(int equi) {
+        assertThat(EquilibriumSolution.findEquilibrium(input)).isEqualTo(equi);
+    }
+
+    @Test
     public void should_merge_all_overlapping_intervals_and_return_mutually_exclusive_intervals() {
         whenInputIntervalsAre("1, 4", "2, 5", "7, 9");
         then_Mutually_Exclusive_Intervals_Are("1, 5", "7, 9");
@@ -41,7 +82,7 @@ public class TestMergeIntervalsAlgorithm extends BaseAlgoTest {
         then_New_Mutually_Exclusive_Intervals_Are("1, 3", "4, 7", "8, 12");
     }
 
-    private void then_New_Mutually_Exclusive_Intervals_Are(String ... intervals) {
+    private void then_New_Mutually_Exclusive_Intervals_Are(String... intervals) {
         List<Interval> expected = parseInput(intervals);
         assertThat(MergeIntervalsProblems.insert(inputIntervals, newInterval))
                 .hasSameElementsAs(expected);
@@ -118,7 +159,7 @@ public class TestMergeIntervalsAlgorithm extends BaseAlgoTest {
             List<Interval> mergedIntervals = new ArrayList<>();
             int i = 0;
 
-            while(i < intervals.size() && intervals.get(i).start < newInterval.start) {
+            while (i < intervals.size() && intervals.get(i).start < newInterval.start) {
                 mergedIntervals.add(intervals.get(i));
                 i++;
             }
@@ -141,6 +182,7 @@ public class TestMergeIntervalsAlgorithm extends BaseAlgoTest {
     private static final class Interval {
         int start;
         int end;
+
         private Interval(int start, int end) {
             this.start = start;
             this.end = end;
@@ -176,6 +218,41 @@ public class TestMergeIntervalsAlgorithm extends BaseAlgoTest {
         @Override
         public int hashCode() {
             return Objects.hash(start, end);
+        }
+    }
+
+    private static class EquilibriumSolution {
+        static int findEquilibrium(int[] input) {
+            int length = input.length;
+            if (length == 0) {
+                return -1;
+            }
+            if (length == 1) {
+                return 0;
+            }
+            if (length == 2) {
+                if (input[0] == 0) {
+                    return 1;
+                } else if(input[1] == 0) {
+                    return 0;
+                }
+            }
+            int leftSum = 0, rightSum = 0;
+            for (int i = 1; i < length; i++) {
+                rightSum += input[i];
+            }
+            if (leftSum == rightSum) {
+                return 0;
+            }
+
+            for (int i = 1; i < length; i++) {
+                leftSum += input[i - 1];
+                rightSum -= input[i];
+                if (leftSum == rightSum) {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }

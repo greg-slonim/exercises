@@ -1,4 +1,4 @@
-package com.gslonim.coding.sorting;
+package com.gslonim.coding.pattern_find_missing_number;
 
 import java.util.Arrays;
 
